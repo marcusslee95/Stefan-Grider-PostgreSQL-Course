@@ -11,3 +11,13 @@ http://localhost:3005/users/3
 ###
 
 http://localhost:3005/users/1;DROP TABLE users
+
+###
+
+POST http://localhost:3005/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "MickJagger69",
+    "bio": "I am Mick"
+}

@@ -14,7 +14,7 @@ router.get('/users', async (req, res) => {
 
 router.get('/users/:id', async (req, res) => {
     const id = req.params.id
-    
+
     const user = await UsersRepository.findById(id)
 
     //if we got back null we realize there wasn't a user of that id so send them back error status 
@@ -27,7 +27,13 @@ router.get('/users/:id', async (req, res) => {
     
 })
 
-router.post('/users', async (req, res) => {})
+router.post('/users', async (req, res) => {
+    const { bio, username } = req.body
+
+    const user = await UsersRepository.insert(bio, username) //this will be the newly created user
+
+    res.send(user)
+})
 
 router.put('/users/:id', async (req, res) => {})
 

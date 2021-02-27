@@ -12,11 +12,23 @@ class UsersRepository {
 
         // const { rows } = await pool.query(`SELECT * FROM users WHERE id = ${id}`)
         const { rows } = await pool.query(
-            `SELECT * FROM users WHERE id = $1`,
+            'SELECT * FROM users WHERE id = $1',
             [id]
         )
         //result would be either empty array or a 1 element array like [{id: 1, bio: 'blah', etc}]
         //knowing how we use it in users router... want to just return either null or the element object itself not an array
+        return toCamelCase(rows)[0]
+
+    }
+
+    static async insert(bio, username){
+
+        // const { rows } = await pool.query(`SELECT * FROM users WHERE id = ${id}`)
+        const { rows } = await pool.query(
+            'INSERT INTO users (bio, username) VALUES ($1, $2) RETURNING *', //since INSERT INTO normally doesn't return anythingwe're telling it to return what we just created
+            [bio, username]
+        )
+        
         return toCamelCase(rows)[0]
 
     }
