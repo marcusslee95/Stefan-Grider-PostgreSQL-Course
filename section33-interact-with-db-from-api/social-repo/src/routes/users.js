@@ -50,6 +50,18 @@ router.put('/users/:id', async (req, res) => {
 
 })
 
-router.delete('/users/:id', async (req, res) => {})
+router.delete('/users/:id', async (req, res) => {
+    const { id } = req.params
+
+    const user = await UsersRepository.delete(id) //this will be the user you just deleted
+
+    if (user){
+        res.send(user)
+    } 
+    else {
+        res.sendStatus(404) //would reach this if user sent in id of user that doesn't exist. So we didn't delete anything
+    }
+    
+})
 
 module.exports = router
