@@ -10,7 +10,11 @@ class UsersRepository {
 
     static async findById(id){
 
-        const { rows } = await pool.query(`SELECT * FROM users WHERE id = ${id}`)
+        // const { rows } = await pool.query(`SELECT * FROM users WHERE id = ${id}`)
+        const { rows } = await pool.query(
+            `SELECT * FROM users WHERE id = $1`,
+            [id]
+        )
         //result would be either empty array or a 1 element array like [{id: 1, bio: 'blah', etc}]
         //knowing how we use it in users router... want to just return either null or the element object itself not an array
         return toCamelCase(rows)[0]
