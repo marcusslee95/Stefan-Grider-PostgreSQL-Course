@@ -1,3 +1,4 @@
+const { query } = require('express')
 const pg = require('pg')
 
 // //Normal way of creating a pool (we didn't do this because we wanted to make it easy to connect to multiple dbs in our app)
@@ -13,6 +14,7 @@ class Pool {
 
     connect(options){
         this._pool = new pg.Pool(options)
+        return this._pool.query('SELECT 1 + 1;')
     }
 
 }
