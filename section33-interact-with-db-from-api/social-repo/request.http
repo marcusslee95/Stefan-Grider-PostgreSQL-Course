@@ -21,3 +21,23 @@ content-type: application/json
     "username": "MickJagger69",
     "bio": "I am Mick"
 }
+
+###
+
+PUT http://localhost:3005/users/1 HTTP/1.1
+content-type: application/json
+
+{
+    "username": "MarcusSadFace9000",
+    "bio": "I am a sad Marcus"
+}
+
+###
+
+PUT http://localhost:3005/users/4 HTTP/1.1
+content-type: application/json
+
+{
+    "username": "MarcusSadFace9000",
+    "bio": "I am a sad Marcus"
+}

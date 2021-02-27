@@ -35,7 +35,20 @@ router.post('/users', async (req, res) => {
     res.send(user)
 })
 
-router.put('/users/:id', async (req, res) => {})
+router.put('/users/:id', async (req, res) => {
+    const { id } = req.params
+    const { bio, username } = req.body
+
+    const user = await UsersRepository.update(id, bio, username) //this will be the user you updated with updated values
+
+    if (user){
+        res.send(user)
+    } 
+    else {
+        res.sendStatus(404) //would reach this if user sent in id of user that doesn't exist. So we didn't update anything
+    }
+
+})
 
 router.delete('/users/:id', async (req, res) => {})
 

@@ -32,6 +32,16 @@ class UsersRepository {
         return toCamelCase(rows)[0]
 
     }
+
+    static async update(id, bio, username){
+        const { rows } = await pool.query(
+            'UPDATE users SET bio = $1, username = $2 WHERE id = $3 RETURNING *', //since INSERT INTO normally doesn't return anythingwe're telling it to return what we just created
+            [bio, username, id]
+        )
+        
+        return toCamelCase(rows)[0]
+
+    }
 }
 
 module.exports = UsersRepository
