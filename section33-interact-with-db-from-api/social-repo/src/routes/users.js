@@ -12,7 +12,20 @@ router.get('/users', async (req, res) => {
     res.send(users)
 })
 
-router.get('/users/:id', async (req, res) => {})
+router.get('/users/:id', async (req, res) => {
+    const id = req.params.id
+    
+    const user = await UsersRepository.findById(id)
+
+    //if we got back null we realize there wasn't a user of that id so send them back error status 
+    if (user){
+        res.send(user)
+    }
+    else {
+        res.sendStatus(404)
+    }
+    
+})
 
 router.post('/users', async (req, res) => {})
 
